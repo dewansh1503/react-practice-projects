@@ -13,8 +13,7 @@ function App() {
       if (isNaN(inputRef.current.value) || inputRef.current.value === '') {
          alert('Enter a number');
          inputRef.current.select();
-      }
-      if (inputRef.current.value > 100000) {
+      } else if (inputRef.current.value > 100000) {
          alert('Number is too large! Enter a value less than 100000');
          inputRef.current.select();
       } else {
@@ -41,7 +40,6 @@ function App() {
                ref={inputRef}
                onKeyDown={(e) => {
                   if (e.key === 'Enter') {
-                     console.log(e.key);
                      addClock();
                   }
                }}
