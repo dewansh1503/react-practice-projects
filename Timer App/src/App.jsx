@@ -2,7 +2,11 @@ import { useEffect, useState, useRef } from 'react';
 import './app.css';
 
 function App() {
-   const [clocks, setClocks] = useState([60]); // in seconds
+   // key is used to identify each timer individually(to prevent state)
+   const [clocks, setClocks] = useState([
+      { key: performance.now() + 2, duration: 30 },
+      { key: performance.now() + 3, duration: 10 },
+   ]); // in seconds
    const inputRef = useRef(null);
 
    function addClock() {
@@ -10,7 +14,14 @@ function App() {
          alert('Enter a number');
          inputRef.current.select();
       } else {
-         setClocks([...clocks, parseInt(inputRef.current.value)]);
+         setClocks([
+            {
+               key: performance.now(),
+               duration: parseInt(inputRef.current.value),
+            },
+            ...clocks,
+         ]);
+         inputRef.current.value = '';
       }
    }
 
@@ -25,30 +36,21 @@ function App() {
             <button onClick={addClock}>Add</button>
          </div>
          <div className="clock-container">
-            {clocks.map((time, i) => (
-               <div key={i} className="timer-card">
-                  <RadialTimer duration={time} />
-                  <svg
-                     onClick={() => {
-                        removeTimer(i);
-                     }}
-                     className="cross"
-                     xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 640 640"
-                  >
-                     <path
-                        fill="#ffffff"
-                        d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
-                     />
-                  </svg>
-               </div>
+            {clocks.map(({ key, duration }, i) => (
+               <RadialTimer
+                  key={key}
+                  duration={duration}
+                  removeTimer={() => {
+                     removeTimer(i);
+                  }}
+               />
             ))}
          </div>
       </div>
    );
 }
 
-const RadialTimer = ({ duration }) => {
+const RadialTimer = ({ duration, removeTimer }) => {
    const [timeLeft, setTimeLeft] = useState(duration); // seconds
    const [isPaused, setIsPaused] = useState(true);
 
@@ -118,44 +120,59 @@ const RadialTimer = ({ duration }) => {
    const progress = (timeLeft / duration) * 100;
 
    return (
-      <div className="timer-container">
-         <svg className="progress-ring">
-            {/* Background circle */}
-            <circle
-               className="progress-ring__circle__bg"
-               stroke="#2c3e50"
-               strokeWidth="10"
-               fill="transparent"
-               r={radius}
-               cx="100"
-               cy="100"
-            />
-            {/* Animated circle */}
-            <circle
-               className="progress-ring__circle"
-               stroke="#3498db"
-               strokeWidth="10"
-               fill="transparent"
-               r={radius}
-               cx="100"
-               cy="100"
-               style={{
-                  strokeDasharray: circumference,
-                  strokeDashoffset: circumference * (1 - progress / 100),
-               }}
+      <div className="timer-card">
+         <div className="timer-container">
+            <svg className="progress-ring">
+               {/* Background circle */}
+               <circle
+                  className="progress-ring__circle__bg"
+                  stroke="#2c3e50"
+                  strokeWidth="10"
+                  fill="transparent"
+                  r={radius}
+                  cx="100"
+                  cy="100"
+               />
+               {/* Animated circle */}
+               <circle
+                  className="progress-ring__circle"
+                  stroke="#3498db"
+                  strokeWidth="10"
+                  fill="transparent"
+                  r={radius}
+                  cx="100"
+                  cy="100"
+                  style={{
+                     strokeDasharray: circumference,
+                     strokeDashoffset: circumference * (1 - progress / 100),
+                  }}
+               />
+            </svg>
+
+            <div className="time-text">{formatTime(timeLeft)}</div>
+
+            <div className="btn-container">
+               <button onClick={handlePause}>
+                  {isPaused ? 'Start' : 'Pause'}
+               </button>
+               {duration !== timeLeft && (
+                  <button onClick={handleReset}> Reset </button>
+               )}
+            </div>
+         </div>
+         <svg
+            onClick={() => {
+               removeTimer();
+            }}
+            className="cross"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 640 640"
+         >
+            <path
+               fill="#ffffff"
+               d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
             />
          </svg>
-
-         <div className="time-text">{formatTime(timeLeft)}</div>
-
-         <div className="btn-container">
-            <button onClick={handlePause}>
-               {isPaused ? 'Start' : 'Pause'}
-            </button>
-            {duration !== timeLeft && (
-               <button onClick={handleReset}> Reset </button>
-            )}
-         </div>
       </div>
    );
 };
