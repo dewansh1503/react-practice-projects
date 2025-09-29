@@ -13,6 +13,10 @@ function App() {
       if (isNaN(inputRef.current.value) || inputRef.current.value === '') {
          alert('Enter a number');
          inputRef.current.select();
+      }
+      if (inputRef.current.value > 100000) {
+         alert('Number is too large! Enter a value less than 100000');
+         inputRef.current.select();
       } else {
          setClocks([
             {
@@ -22,6 +26,7 @@ function App() {
             ...clocks,
          ]);
          inputRef.current.value = '';
+         inputRef.current.blur();
       }
    }
 
