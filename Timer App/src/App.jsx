@@ -32,7 +32,17 @@ function App() {
    return (
       <div className="App">
          <div className="add">
-            <input ref={inputRef} type="text" placeholder="Time (seconds)" />
+            <input
+               ref={inputRef}
+               onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                     console.log(e.key);
+                     addClock();
+                  }
+               }}
+               type="text"
+               placeholder="Time (seconds)"
+            />
             <button onClick={addClock}>Add</button>
          </div>
          <div className="clock-container">
