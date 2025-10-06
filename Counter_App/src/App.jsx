@@ -17,7 +17,7 @@ function Count() {
    return <div>Count {count}</div>;
 }
 function Iseven() {
-   const iseven = useSelector((state) => state.count % 2 === 0);
+   const iseven = useSelector((state) => state.count.count % 2 === 0);
    return <div>{iseven ? 'Even' : 'Odd'} </div>;
 }
 
