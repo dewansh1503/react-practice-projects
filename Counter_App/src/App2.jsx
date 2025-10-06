@@ -26,7 +26,6 @@ function App2() {
 
 function User() {
    const { loading, user, error } = useSelector((state) => state.user);
-   console.log(user);
    if (error) {
       return <div> Failed to fetch user</div>;
    }
