@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../features/userSlice';
-import { useId, useRef } from 'react';
+import { useRef } from 'react';
 
 function App2() {
    const inputRef = useRef(null);
