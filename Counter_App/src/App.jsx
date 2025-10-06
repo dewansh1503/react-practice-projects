@@ -5,7 +5,7 @@ function App() {
    return (
       <>
          <Count />
-         {/* <Iseven /> */}
+         <Iseven />
          <Increase />
          <Decrease />
       </>
@@ -15,14 +15,34 @@ function Count() {
    const count = useSelector((state) => state.count);
    return <div>Count {count}</div>;
 }
-
-function Increase(){
-   const dispatch = useDispatch()
-   return <button onClick={()=>{dispatch(increase())}}>Increase</button>
+function Iseven() {
+   const iseven = useSelector((state) => state.count % 2 === 0);
+   return <div>{iseven ? 'Even' : 'Odd'} </div>;
 }
-function Decrease(){
-   const dispatch = useDispatch()
-   return <button onClick={()=>{dispatch(decrease())}}>Decrease</button>
+
+function Increase() {
+   const dispatch = useDispatch();
+   return (
+      <button
+         onClick={() => {
+            dispatch(increase());
+         }}
+      >
+         Increase
+      </button>
+   );
+}
+function Decrease() {
+   const dispatch = useDispatch();
+   return (
+      <button
+         onClick={() => {
+            dispatch(decrease());
+         }}
+      >
+         Decrease
+      </button>
+   );
 }
 
 export default App;
