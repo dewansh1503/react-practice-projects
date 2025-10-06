@@ -18,11 +18,11 @@ function Count() {
 
 function Increase(){
    const dispatch = useDispatch()
-   return <button onClick={()=>{dispatch(increase)}}>Increase</button>
+   return <button onClick={()=>{dispatch(increase())}}>Increase</button>
 }
 function Decrease(){
    const dispatch = useDispatch()
-   return <button onClick={()=>{dispatch(decrease)}}>Decrease</button>
+   return <button onClick={()=>{dispatch(decrease())}}>Decrease</button>
 }
 
 export default App;
