@@ -16,5 +16,5 @@ const countSlice = createSlice({
    },
 });
 
-export const { increase, decrease } = countSlice.reducer; // actions
+export const { increase, decrease } = countSlice.actions;
 export default countSlice.reducer;
