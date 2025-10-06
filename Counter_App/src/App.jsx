@@ -4,6 +4,7 @@ import { decrease, increase } from '../features/counterSlice';
 function App() {
    return (
       <>
+         <h1>App1</h1>
          <Count />
          <Iseven />
          <Increase />
@@ -12,7 +13,7 @@ function App() {
    );
 }
 function Count() {
-   const count = useSelector((state) => state.count);
+   const count = useSelector((state) => state.count.count);
    return <div>Count {count}</div>;
 }
 function Iseven() {
