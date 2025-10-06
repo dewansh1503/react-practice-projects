@@ -7,7 +7,11 @@ export const fetchUser = createAsyncThunk(
          const user = await fetch(
             `https://jsonplaceholder.typicode.com/users/${userid}`
          );
-         return await user.json();
+
+         if (user.ok) return await user.json();
+         return thunkAPI.rejectWithValue(
+            'Failed to fetch user try id less than 10'
+         );
       } catch (err) {
          return thunkAPI.rejectWithValue(err.message);
       }

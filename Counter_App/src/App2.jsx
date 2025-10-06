@@ -12,7 +12,8 @@ function App2() {
          <button
             onClick={() => {
                const userid = parseInt(inputRef.current.value);
-               if (userid && !isNaN(userid)) dispatch(fetchUser(userid));
+               if (userid > 10) alert('Enter id less than 11');
+               else if (userid && !isNaN(userid)) dispatch(fetchUser(userid));
                else alert('enter valid id');
             }}
          >
