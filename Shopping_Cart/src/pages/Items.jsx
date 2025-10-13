@@ -11,7 +11,7 @@ export default function Items() {
       }
    }
    
-   return (
+     return (
       <>
          <ul className="list bg-base-100 rounded-box shadow-md">
             <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
@@ -37,7 +37,12 @@ export default function Items() {
                            <p className="text-2xl font-semibold">
                               ${item.price}
                            </p>
-                           <button className="btn btn-primary text-lg">
+                           <button
+                              className="btn btn-primary text-lg"
+                              onClick={() => {
+                                 toCart(item.id);
+                              }}
+                           >
                               Cart
                               <svg
                                  xmlns="http://www.w3.org/2000/svg"
@@ -54,13 +59,30 @@ export default function Items() {
                                  />
                               </svg>
                            </button>
-                           <button className="btn btn-square btn-ghost">
+                           <button
+                              className="btn btn-square btn-ghost"
+                              onClick={() => {
+                                 toWishlist(item);
+                              }}
+                           >
                               <svg
                                  className="size-[1.4em]"
                                  xmlns="http://www.w3.org/2000/svg"
                                  viewBox="0 0 24 24"
-                                 fill="none"
-                                 stroke="currentColor"
+                                 fill={
+                                    wishlist.find(
+                                       (product) => product.id === item.id
+                                    )
+                                       ? 'red'
+                                       : 'none'
+                                 }
+                                 stroke={
+                                    wishlist.find(
+                                       (product) => product.id === item.id
+                                    )
+                                       ? 'red'
+                                       : 'currentColor'
+                                 }
                               >
                                  <g
                                     strokeLinejoin="round"
