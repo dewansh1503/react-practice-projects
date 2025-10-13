@@ -1,36 +1,16 @@
-import { nanoid } from '@reduxjs/toolkit';
 export default function Items() {
-   const items = [
-      {
-         id: nanoid(),
-         imageId: 237,
-         price: 6000,
-         title: 'Dogesh Bhai',
-         description: 'New dog to get hands on. Get yours now!!',
-      },
-      {
-         id: nanoid(),
-         imageId: 84,
-         price: 2000,
-         title: 'Bridge',
-         description: 'Kr do chadai',
-      },
-      {
-         id: nanoid(),
-         price: 1000,
-         imageId: 96,
-         title: 'Controller',
-         description: ' Game khelna hai ? Get yours now!!',
-      },
-      {
-         id: nanoid(),
-         price: 3000,
-         imageId: 158,
-         title: 'Concert tickets',
-         description: 'Coldplay ki tickets Get yours now!!',
-      },
-   ];
-
+    
+   function toWishlist(item) {
+      const alreadyInWishlist = wishlist.find(
+         (product) => product.id === item.id
+      );
+      if (!alreadyInWishlist) {
+         dispatch(addToWishlist(item));
+      } else {
+         dispatch(removeFromWishlist(item.id));
+      }
+   }
+   
    return (
       <>
          <ul className="list bg-base-100 rounded-box shadow-md">
