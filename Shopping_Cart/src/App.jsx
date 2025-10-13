@@ -1,39 +1,50 @@
-export default function App() {
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import TabRoutes from './routes.jsx';
+import { useSelector } from 'react-redux';
+export default function MyApp() {
    return (
       <>
-         <Tabs />
+         <TabRoutes />
       </>
    );
 }
 
-function Tabs() {
+export function Tabs() {
+   const currentTab = useLocation().pathname.replace('/', '');
+   const wishlistLength = useSelector((state) => state.wishlist.length);
+
    return (
       <>
-         <div className="flex justify-between">
-            <div className="tabs tabs-border tabs-xl">
-               <label className="tab flex items-center gap-2">
-                  <input type="radio" name="my_tabs" className="hidden" />
-                  <span>Items</span>
-               </label>
-
-               <div className="tab-content border-base-300 bg-base-100 p-10">
-                  {<Items />}
-               </div>
-
+         <div className="tabs tabs-border tabs-xl">
+            <Link to={'items'}>
                <label className="tab flex items-center gap-2">
                   <input
                      type="radio"
                      name="my_tabs"
                      className="hidden"
-                     defaultChecked
+                     checked={currentTab === 'items'}
+                     readOnly
+                  />
+                  <span>Items</span>
+               </label>
+            </Link>
+
+            <Link to={'wishlist'}>
+               <label className="tab flex items-center gap-2">
+                  <input
+                     type="radio"
+                     name="my_tabs"
+                     className="hidden"
+                     checked={currentTab === 'wishlist'}
+                     readOnly
                   />
                   <span>Wishlist</span>
                   <svg
                      className="size-4"
                      xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24"
-                     fill="none"
-                     stroke="currentColor"
+                     fill={!wishlistLength ? 'none' : 'red'}
+                     stroke={!wishlistLength ? 'currentColor' : 'red'}
                   >
                      <g
                         strokeLinejoin="round"
@@ -44,20 +55,24 @@ function Tabs() {
                      </g>
                   </svg>
                </label>
+            </Link>
 
-               <div className="tab-content border-base-300 bg-base-100">
-                  {<Wishlist />}
-               </div>
-
+            <Link to={'cart'}>
                <label className="tab flex items-center gap-2">
-                  <input type="radio" name="my_tabs" className="hidden" />
+                  <input
+                     type="radio"
+                     name="my_tabs"
+                     className="hidden"
+                     checked={currentTab === 'cart'}
+                     readOnly
+                  />
                   <span>Cart</span>
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
-                     fill="none"
                      viewBox="0 0 24 24"
                      strokeWidth={1.5}
-                     stroke="currentColor"
+                     fill={!wishlistLength ? 'none' : 'red'}
+                     stroke={!wishlistLength ? 'currentColor' : 'red'}
                      className="size-4"
                   >
                      <path
@@ -67,12 +82,11 @@ function Tabs() {
                      />
                   </svg>
                </label>
+            </Link>
+         </div>
 
-               <div className="tab-content border-base-300 bg-base-100 p-10">
-                  {<Cart />}
-               </div>
-            </div>
-            <div className="border-2 border-red-200 ">hey </div>
+         <div className="border-base-300 bg-base-100 p-5">
+            <Outlet />
          </div>
       </>
    );
