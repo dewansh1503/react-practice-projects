@@ -1,5 +1,11 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addToWishlist, removeFromWishlist } from '../src/slices';
+
 export default function Items() {
-    
+   const items = useSelector((state) => state.items);
+   const wishlist = useSelector((state) => state.wishlist);
+   const dispatch = useDispatch();
+
    function toWishlist(item) {
       const alreadyInWishlist = wishlist.find(
          (product) => product.id === item.id
@@ -10,8 +16,8 @@ export default function Items() {
          dispatch(removeFromWishlist(item.id));
       }
    }
-   
-     return (
+
+   return (
       <>
          <ul className="list bg-base-100 rounded-box shadow-md">
             <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
