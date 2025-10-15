@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../src/slices';
+import { useState } from 'react';
 
 export default function Items() {
    const items = useSelector((state) => state.items);
@@ -28,9 +29,9 @@ export default function Items() {
                <li key={item.id} className="list-row">
                   <div className="card card-side bg-base-100 shadow-sm">
                      <figure>
-                        <img
-                           src={`https://picsum.photos/id/${item.imageId}/170/150`}
-                           alt="img"
+                        <ProductImage
+                           title={item.title}
+                           imageId={item.imageId}
                         />
                      </figure>
                      <div className="card-body min-w-100 px-6 py-1">
