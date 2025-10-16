@@ -39,7 +39,7 @@ const wishlistSlice = createSlice({
    initialState: [],
    reducers: {
       addToWishlist: (state, action) => {
-         state.push(action.payload);
+         state.unshift(action.payload);
       },
       removeFromWishlist: (state, action) => {
          return state.filter((item) => item.id !== action.payload);
