@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Wishlist() {
    const dispatch = useDispatch();
    const wishlist = useSelector((state) => state.wishlist);
+   const alertBoxRef = useRef();
 
-   function toWishlist(item) {
-      const alreadyInWishlist = wishlist.find(
+    function toWishlist(item) {
+      const inWishlist = wishlist.find(
          (product) => product.id === item.id
       );
-      if (!alreadyInWishlist) {
-         dispatch(addToWishlist(item));
-      } else {
+      if (inWishlist) {
          dispatch(removeFromWishlist(item.id));
+         // console.log('removed from Wishlist');
+         alertBoxRef.current?.addAlert(item);
       }
    }
 
@@ -65,6 +66,7 @@ export default function Wishlist() {
                            </button>
                            <button
                               className="btn btn-square btn-ghost"
+                              title="remove from wishlist"
                               onClick={() => {
                                  toWishlist(item);
                               }}
@@ -103,11 +105,10 @@ export default function Wishlist() {
                </li>
             ))}
          </ul>
-         <Alert />
+         <AlertBox ref={alertBoxRef} />
       </>
    );
 }
-
 const AlertBox = forwardRef((props, ref) => {
    const [alerts, setAlert] = useState([]);
    const containerRef = useRef(null);
