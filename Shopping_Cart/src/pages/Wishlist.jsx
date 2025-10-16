@@ -108,6 +108,57 @@ export default function Wishlist() {
    );
 }
 
+const AlertBox = forwardRef((props, ref) => {
+   const [alerts, setAlert] = useState([]);
+   const containerRef = useRef(null);
+   const dispatch = useDispatch();
+
+   useImperativeHandle(ref, () => ({
+      addAlert(item) {
+         const timeoutId = setTimeout(() => {
+            setAlert((alerts) => {
+               // console.log('alert removed after 5 sec', item.title);
+               return alerts.filter((alert) => alert.id !== item.id);
+            });
+         }, 5000);
+
+         setAlert((prev) => [...prev, { ...item, timeoutId }]);
+      },
+   }));
+
+   function onUndo(item) {
+      clearTimeout(item.timeoutId);
+      setAlert((alerts) => {
+         // console.log('alert removed immediately', item.title);
+         return alerts.filter((alert) => alert.id !== item.id);
+      });
+      dispatch(addToWishlist(item));
+   }
+
+   useEffect(() => {
+      const container = containerRef.current;
+      const isNearBottom = container.scrollHeight - container.scrollTop < 300;
+
+      if (containerRef.current && isNearBottom) {
+         containerRef.current.scrollTop = containerRef.current.scrollHeight;
+      }
+   }, [alerts]);
+
+   return (
+      <>
+         <div
+            ref={containerRef}
+            style={{ scrollbarWidth: 'none', scrollBehavior: 'smooth' }}
+            className="fixed bottom-4 right-4 w-fit max-h-44 bg-transparent overflow-y-scroll "
+         >
+            {alerts.map((item) => {
+               return <Alert key={item.id} item={item} onUndo={onUndo} />;
+            })}
+         </div>
+      </>
+   );
+});
+
 
 function Alert() {
    return (
