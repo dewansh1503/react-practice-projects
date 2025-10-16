@@ -168,10 +168,13 @@ const AlertBox = forwardRef((props, ref) => {
 });
 
 
-function Alert() {
+function Alert({ item, onUndo }) {
    return (
       <>
-         <div role="alert" className="w-fit alert alert-vertical sm:alert-horizontal">
+         <div
+            role="alert"
+            className="alert alert-horizontal text-lg w-fit h-fit mb-3"
+         >
             <svg
                xmlns="http://www.w3.org/2000/svg"
                fill="none"
@@ -187,8 +190,15 @@ function Alert() {
                ></path>
             </svg>
             <span>
-               Removed item.title from wishlist{' '}
-               <a className="link link-info">Undo</a>
+               Removed <strong>{item.title}</strong> from wishlist{' '}
+               <a
+                  className="link link-info"
+                  onClick={() => {
+                     onUndo(item);
+                  }}
+               >
+                  Undo
+               </a>
             </span>
          </div>
       </>
