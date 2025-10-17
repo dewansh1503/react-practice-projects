@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import TabRoutes from './routes.jsx';
 import { useSelector } from 'react-redux';
+
 export default function MyApp() {
    return (
       <>
@@ -12,6 +13,7 @@ export default function MyApp() {
 export function Tabs() {
    const currentTab = useLocation().pathname.replace('/', '');
    const wishlistLength = useSelector((state) => state.wishlist.length);
+   const cartLength = useSelector((state) => state.cart.length);
 
    return (
       <>
@@ -71,8 +73,8 @@ export function Tabs() {
                      xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24"
                      strokeWidth={1.5}
-                     fill={!wishlistLength ? 'none' : 'red'}
-                     stroke={!wishlistLength ? 'currentColor' : 'red'}
+                     fill={!cartLength ? 'none' : 'white'}
+                     stroke={'currentColor'}
                      className="size-4"
                   >
                      <path
