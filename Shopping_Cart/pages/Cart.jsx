@@ -71,3 +71,25 @@ export default function Cart() {
       </>
    );
 }
+
+function ProductImage({ imageId, title }) {
+   const [loading, setLoading] = useState(true);
+   return (
+      <>
+         {loading && <div className="skeleton h-[150px] w-[170px]"></div>}
+         <img
+            src={`https://picsum.photos/id/${imageId}/170/150`}
+            alt={title}
+            loading="lazy"
+            onLoad={() => {
+               setLoading(false);
+            }}
+            onError={(e) => {
+               e.target.style.width = '10rem';
+               setLoading(false);
+            }}
+            className={`${loading ? 'opacity-0 absolute' : 'opacity-100 '}`}
+         />
+      </>
+   );
+}
