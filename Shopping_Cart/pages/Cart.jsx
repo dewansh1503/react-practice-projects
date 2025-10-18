@@ -1,3 +1,10 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+   decreaseQuantity,
+   increaseQunatity,
+   removeFromCart,
+} from '../src/slices.js';
 
 export default function Cart() {
    const cart = useSelector((state) => state.cart);
