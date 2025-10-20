@@ -47,7 +47,6 @@ const wishlistSlice = createSlice({
    },
 });
 
-
 const cartSlice = createSlice({
    name: 'cartSlice',
    initialState: [],
@@ -61,8 +60,11 @@ const cartSlice = createSlice({
    },
 });
 
-
 export const itemsReducer = itemSlice.reducer;
 
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
 export const wishlistReducer = wishlistSlice.reducer;
+
+export const cartReducer = cartSlice.reducer;
+export const { addToCart, increaseQunatity, decreaseQuantity, removeFromCart } =
+   cartSlice.actions;
