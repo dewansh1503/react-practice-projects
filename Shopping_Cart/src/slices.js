@@ -47,6 +47,21 @@ const wishlistSlice = createSlice({
    },
 });
 
+
+const cartSlice = createSlice({
+   name: 'cartSlice',
+   initialState: [],
+   reducers: {
+      addToCart: (state, action) => {
+         state.push({ ...action.payload, quantity: 1 });
+      },
+      removeFromCart: (state, action) => {
+         return state.filter((item) => item.id !== action.payload);
+      },
+   },
+});
+
+
 export const itemsReducer = itemSlice.reducer;
 
 export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
