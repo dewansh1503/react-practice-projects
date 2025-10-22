@@ -54,6 +54,14 @@ const cartSlice = createSlice({
       addToCart: (state, action) => {
          state.push({ ...action.payload, quantity: 1 });
       },
+      increaseQunatity: (state, action) => {
+         state.map((item) => {
+            if (item.id === action.payload) {
+               ++item.quantity;
+            }
+            return item;
+         });
+      },
       removeFromCart: (state, action) => {
          return state.filter((item) => item.id !== action.payload);
       },
