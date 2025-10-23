@@ -62,6 +62,14 @@ const cartSlice = createSlice({
             return item;
          });
       },
+      decreaseQuantity: (state, action) => {
+         state.map((item) => {
+            if (item.id === action.payload) {
+               --item.quantity;
+            }
+            return item;
+         });
+      },
       removeFromCart: (state, action) => {
          return state.filter((item) => item.id !== action.payload);
       },
