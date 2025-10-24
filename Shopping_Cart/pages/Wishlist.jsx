@@ -26,6 +26,15 @@ export default function Wishlist() {
       if (!alreadyInCart) dispatch(addToCart(item));
    }
 
+   function getProductQuantity(item) {
+      const p = cart.find((product) => product.id === item.id);
+      return p?.quantity;
+   }
+   function isItemInCart(id) {
+      if (cart.find((item) => item.id === id)) return true;
+      return false;
+   }
+
    return (
       <>
          {!wishlist.length && (
