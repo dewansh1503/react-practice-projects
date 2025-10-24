@@ -21,7 +21,11 @@ export default function Wishlist() {
          alertBoxRef.current?.addAlert(item);
       }
    }
-   
+   function toCart(item) {
+      const alreadyInCart = cart.find((product) => product.id === item.id);
+      if (!alreadyInCart) dispatch(addToCart(item));
+   }
+
    return (
       <>
          {!wishlist.length && (
