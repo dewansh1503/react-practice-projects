@@ -34,6 +34,9 @@ export default function Wishlist() {
       if (cart.find((item) => item.id === id)) return true;
       return false;
    }
+   function addQunatity(item) {
+      dispatch(increaseQunatity(item.id));
+   }
 
    return (
       <>
