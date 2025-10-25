@@ -34,8 +34,20 @@ export default function Wishlist() {
       if (cart.find((item) => item.id === id)) return true;
       return false;
    }
+
    function addQunatity(item) {
       dispatch(increaseQunatity(item.id));
+   }
+   function reduceQunatity(item) {
+      const product = cart.find((product) => product.id === item.id);
+      if (product?.quantity) {
+         if (product.quantity > 1) {
+            dispatch(decreaseQuantity(item.id));
+         } else {
+            // console.log('removing from the cart', item.id);
+            dispatch(removeFromCart(item.id));
+         }
+      }
    }
 
    return (
