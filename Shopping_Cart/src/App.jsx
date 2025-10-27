@@ -89,8 +89,62 @@ export function Tabs() {
                   </Link>
                </div>
 
-         <div className="border-base-300 bg-base-100 p-5">
-            <Outlet />
+               <div className="border-base-300 bg-base-100 p-5 relative z-10">
+                  <Outlet />
+               </div>
+            </div>
+
+            <div className="drawer lg:drawer-open max-w-full lg:w-[40%] drawer-end top-3 right-3 bg-base-100">
+               <input
+                  id="my-drawer"
+                  type="checkbox"
+                  className="drawer-toggle"
+               />
+               <div className="drawer-content flex justify-end ">
+                  <label
+                     htmlFor="my-drawer"
+                     className="btn drawer-button lg:hidden"
+                  >
+                     Bill
+                  </label>
+               </div>
+               <div className="drawer-side w-full z-0">
+                  <label
+                     htmlFor="my-drawer"
+                     aria-label="close"
+                     className="drawer-overlay"
+                  ></label>
+
+                  <div className="overflow-x-auto bg-base-100 md:min-h-full min-h-[60%] max-w-fit">
+                     <table className="table table-zebra text-lg tracking-wide">
+                        <thead className='text-lg tracking-wide'>
+                           <tr>
+                              <th></th>
+                              <th className="min-w-20">Item</th>
+                              <th>Quantity</th>
+                              <th>Price ($)</th>
+                              <th>Cost ($)</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {cart.map((item, i) => (
+                              <tr key={i}>
+                                 <th>{i + 1}</th>
+                                 <td>{item.title}</td>
+                                 <td className="text-center">
+                                    {item.quantity}
+                                 </td>
+                                 <td className="text-center">{item.price}</td>
+                                 <td className="text-center">
+                                    {item.price * item.quantity}
+                                 </td>
+                              </tr>
+                           ))}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
          </div>
       </>
    );
