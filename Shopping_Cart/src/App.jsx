@@ -13,7 +13,7 @@ export default function MyApp() {
 export function Tabs() {
    const currentTab = useLocation().pathname.replace('/', '');
    const wishlistLength = useSelector((state) => state.wishlist.length);
-   const cartLength = useSelector((state) => state.cart.length);
+   const cart = useSelector((state) => state.cart);
 
    return (
       <>
