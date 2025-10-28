@@ -15,6 +15,19 @@ export function Tabs() {
 	const wishlistLength = useSelector((state) => state.wishlist.length);
 	const cart = useSelector((state) => state.cart);
 
+	function getTotalCost() {
+		const totalCost = cart.reduce(
+			(acc, item) => acc + item.price * item.quantity,
+			0
+		);
+		const formattedCost = new Intl.NumberFormat('en-US', {
+			// style: 'currency',
+			currency: 'USD',
+		}).format(totalCost);
+
+		return formattedCost;
+	}
+
 	return (
 		<>
 			<div className="flex w-full box-border">
