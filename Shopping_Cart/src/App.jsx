@@ -145,19 +145,16 @@ export function Tabs() {
 										</tr>
 									))}
 								</tbody>
-								<tfoot>
-									<tr className="text-lg text-end pr-6">
-										<th colSpan={4}>Total</th>
-										<td className="text-center text-white font-semibold">
-											{cart.reduce((acc, item) => {
-												return (
-													acc +
-													item.price * item.quantity
-												);
-											}, 0)}
-										</td>
-									</tr>
-								</tfoot>
+								{Boolean(cart.length) && ( // push first (adding total conditionally)
+									<tfoot>
+										<tr className="text-lg text-end pr-6">
+											<th colSpan={4}>Total</th>
+											<td className="text-center text-white font-semibold">
+												{getTotalCost()}
+											</td>
+										</tr>
+									</tfoot>
+								)}
 							</table>
 						</div>
 					</div>
