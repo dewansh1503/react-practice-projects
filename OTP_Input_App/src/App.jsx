@@ -57,6 +57,14 @@ function OtpInput() {
           />
         ))}
       </div>
+      <button
+        onClick={(e) => {
+          let otp = input.join("");
+          console.log(Number(otp));
+        }}
+      >
+        get otp
+      </button>
     </>
   );
 }
