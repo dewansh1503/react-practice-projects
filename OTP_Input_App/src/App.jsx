@@ -27,6 +27,8 @@ function OtpInput() {
     setInput((prev) =>
       prev.map((value, i) => (i === index ? newValue : value)),
     );
+    if (newValue && index + 1 < inputRef.current.length)
+      inputRef.current[index + 1].select();
   }
 
   function handleKeyDown(e, i) {
