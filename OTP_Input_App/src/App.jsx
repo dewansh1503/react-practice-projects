@@ -5,7 +5,7 @@ import "./index.css";
 function App() {
   return (
     <>
-      <div className="flex h-screen flex-col items-center justify-center gap-3">
+      <div className="relative mt-20 flex flex-col items-center gap-3">
         <h1 className="text-2xl font-semibold">Otp box</h1>
         <OtpInput />
       </div>
