@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useState } from "react";
+import "./index.css";
 
 function App() {
   return (
