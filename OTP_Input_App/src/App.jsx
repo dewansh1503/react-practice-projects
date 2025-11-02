@@ -31,8 +31,9 @@ function OtpInput() {
       inputRef.current[index + 1].select();
   }
 
-  function handleKeyDown(e, i) {
-    console.log(e);
+  function handleKeyDown(e, index) {
+    if (e.key === "Backspace" && index - 1 >= 0 && input[index].length !== 1)
+      inputRef.current[index - 1].focus();
   }
   return (
     <>
