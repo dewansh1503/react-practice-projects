@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 
 function App() {
-  // side bar app with manula and automatic closing and opening
   const [open, setOpen] = useState(window.innerWidth >= 640);
   const [manual, setManual] = useState(false);
 
@@ -49,15 +48,15 @@ function App() {
             />
           )}
         </div>
-
         <div
-          className={`w-0 space-y-2 bg-amber-700 p-5 opacity-0 duration-200 ${open && "w-3xs opacity-100"}`}
+          className={`fixed w-0 space-y-2 overflow-hidden bg-amber-700 p-5 opacity-0 duration-200 ${open && "w-3xs opacity-100"}`}
         >
           <div className="rounded bg-blue-100 p-1">one</div>
           <div className="rounded bg-blue-200 p-1">two</div>
           <div className="rounded bg-blue-300 p-1">three</div>
           <div className="rounded bg-blue-500 p-1">four</div>
         </div>
+        content on the main page
       </div>
     </>
   );
