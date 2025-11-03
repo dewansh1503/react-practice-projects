@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useCallback } from "react";
 
 function App() {
+  // Sidebar automatically opens when width > 640 and closes when width < 640
+  // we can toggle the auto close and open by clicking the icon
   const [open, setOpen] = useState(window.innerWidth >= 640);
   const [manual, setManual] = useState(false);
 
