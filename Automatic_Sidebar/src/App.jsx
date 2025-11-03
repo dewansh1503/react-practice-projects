@@ -58,6 +58,7 @@ function App() {
           <div className="rounded bg-blue-300 p-1">three</div>
           <div className="rounded bg-blue-500 p-1">four</div>
         </div>
+        {/* <AnotherSidebar/> */}
         content on the main page
       </div>
     </>
