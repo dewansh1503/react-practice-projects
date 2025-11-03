@@ -62,4 +62,45 @@ function App() {
   );
 }
 
+const AnotherSidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="relative flex h-screen bg-gray-100 font-sans">
+      {/* Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed top-4 left-4 z-50 rounded bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+      >
+        {isOpen ? "Close Menu" : "Open Menu"}
+      </button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 transform bg-gray-800 p-6 text-white transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"} `}
+      >
+        <h2 className="mb-6 text-2xl font-bold">Sidebar Menu</h2>
+        <ul className="space-y-4">
+          <li className="cursor-pointer hover:text-gray-300">🏠 Home</li>
+          <li className="cursor-pointer hover:text-gray-300">📄 About</li>
+          <li className="cursor-pointer hover:text-gray-300">📞 Contact</li>
+        </ul>
+      </div>
+
+      {/* Main Content */}
+      <main
+        className={`flex-1 p-8 transition-all duration-300 ${
+          isOpen ? "ml-64" : "ml-0"
+        }`}
+      >
+        <h1 className="mb-4 text-3xl font-bold">Welcome!</h1>
+        <p className="text-gray-700">
+          This is your main page content. Click the button to toggle the
+          sidebar.
+        </p>
+      </main>
+    </div>
+  );
+};
+
 export default App;
