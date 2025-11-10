@@ -15,7 +15,10 @@ function Greet({ name }: { name: string }) {
 	);
 }
 
-function Note({ place }) {
+type noteProp = {
+	place: string;
+};
+function Note({ place }: noteProp) {
 	return (
 		<>
 			<h1>Welcome {place}</h1>
