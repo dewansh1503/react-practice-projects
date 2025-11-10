@@ -7,7 +7,12 @@ function App() {
 }
 
 function Greet({ name }: { name: string }) {
-	return <div>{name}</div>;
+	return (
+		<div>
+			<div>Hey {name}! </div>
+			<div>Welcome home</div>
+		</div>
+	);
 }
 
 export default App;
