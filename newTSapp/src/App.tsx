@@ -11,7 +11,9 @@ function App() {
 	ws.onerror = (e) => {
 		console.log('error is: ', e);
 	};
-	// ws.send('good morning server');
+	ws.onopen = () => {
+		ws.send('hey there server');
+	};
 
 	function sendMessage() {
 		const message = inputref.current?.value.toString();
