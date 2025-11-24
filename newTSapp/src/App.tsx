@@ -8,6 +8,10 @@ function App() {
 	ws.onmessage = (e) => {
 		console.log('message from server:', e.data);
 	};
+	ws.onerror = (e) => {
+		console.log('error is: ', e);
+	};
+	// ws.send('good morning server');
 
 	function sendMessage() {
 		const message = inputref.current?.value.toString();
