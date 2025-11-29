@@ -7,6 +7,6 @@ wss.on('connection', (socket) => {
 
 	socket.on('message', (e) => {
 		wss.clients.forEach((c) => c.send(e.toString()));
-		// console.log(e.toString());
+		console.log(e.toString());
 	});
 });
